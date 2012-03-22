@@ -63,7 +63,6 @@ function postWithAjax(){
 		url: $("#urlvalue").val(),
 		type: $("#httpmethod").val(),
 		complete: function(jqXHR){
-			$("#outputpre").text(jqXHR.responseText)
 			$("#statuspre").text("HTTP " + jqXHR.status + " " + jqXHR.statusText);
 			if(jqXHR.status >= 200 && jqXHR.status < 300){
 			  $("#statuspre").addClass("alert-success");
@@ -72,6 +71,7 @@ function postWithAjax(){
 			} else {
 			  $("#statuspre").addClass("alert-warning");
 			}
+			$("#outputpre").text(jqXHR.responseText)			
 		}
 	};
 	
@@ -135,5 +135,9 @@ function checkForFormFiles(){
 	  $("#errordiv").append('<div class="alert alert-error"> <a class="close" data-dismiss="alert">&times;</a> <strong>Alert!</strong> You are posting a form using method ' + method + ' but your request contains files. You can only upload files using HTTP POST method. </div>');
   }
 }
+
+$(document).ready(function() {
+  $("#urlvalue").val(document.location.href);
+});
 
 
