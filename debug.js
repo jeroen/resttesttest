@@ -64,7 +64,9 @@ function postWithAjax(){
 		type: $("#httpmethod").val(),
 		complete: function(jqXHR){
 			$("#statuspre").text("HTTP " + jqXHR.status + " " + jqXHR.statusText);
-			if(jqXHR.status >= 200 && jqXHR.status < 300){
+			if(jqXHR.status == 0){
+				httpZeroError();
+			} else if(jqXHR.status >= 200 && jqXHR.status < 300){
 			  $("#statuspre").addClass("alert-success");
 			} else if(jqXHR.status >= 400) {
 			  $("#statuspre").addClass("alert-error");
@@ -140,4 +142,7 @@ $(document).ready(function() {
   $("#urlvalue").val(document.location.href);
 });
 
+function httpZeroError(){
+  $("#errordiv").append('<div class="alert alert-error"> <a class="close" data-dismiss="alert">&times;</a> <strong>Oh no!</strong> Javascript returned an HTTP 0 error. One common reason this might happen is that you requested a cross-domain resource from a server that did not include the appropriate CORS headers in the response.</div>');
+}
 
