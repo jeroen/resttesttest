@@ -1,0 +1,20 @@
+#outputframe{
+  height: 600px;
+  border: 1px lightgray solid;  
+}
+
+#outputpre{
+  min-height: 350px;
+}
+
+#allparameters{
+  display: none;
+}
+
+#formspinner, #ajaxspinner, #outputframe{
+  display: none;
+}
+
+#urlvalue{
+	width: 100%;
+}
