@@ -223,7 +223,7 @@ function updateCookieWarning(){
   var patharray = window.location.pathname.split("/");
   var patharray = patharray.slice(0,patharray.length-1);
   var newpath = patharray.join("/")
-  $("#cookiewarningdiv").append("<p>Note: Table only shows cookies stored under <tt>" + window.location.hostname + newpath + "</tt>. Cookies on other domains/paths cannot be displayed, but will be included in Ajax requests to those domains/paths either way. </p>");
+  $("#cookiewarningdiv").append("<p>Note: Table only shows cookies stored under <tt>" + window.location.hostname + newpath + "</tt>. Cookies on other domains/paths cannot be displayed, but will still be included in Ajax requests to those domains/paths. </p>");
 }
 
 
