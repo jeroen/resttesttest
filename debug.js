@@ -29,6 +29,15 @@ $("#addfilebutton").click ( function() {
     return false;
 });
 
+$("#httpmethod").change ( function(){
+	var method = $("#httpmethod").val();
+	if(method == "GET" || method == "POST"){
+		$("#submitform").removeClass("disabled")
+	} else {
+		$("#submitform").addClass("disabled")
+	}
+})
+
 
 function postToIframe(){
 	var paramform = $("#paramform");
@@ -73,7 +82,8 @@ function postWithAjax(){
 			} else {
 			  $("#statuspre").addClass("alert-warning");
 			}
-			$("#outputpre").text(jqXHR.responseText)			
+			$("#outputpre").text(jqXHR.responseText);
+			$("#headerpre").text(jqXHR.getAllResponseHeaders());
 		}
 	};
 	
@@ -85,6 +95,7 @@ function postWithAjax(){
 	
 	 $("#outputframe").hide();
 	 $("#outputpre").empty();
+	 $("#headerpre").empty();
 	 $("#outputframe").attr("src", "")
 	 $("#ajaxoutput").show();
 	 $("#statuspre").text("0");	

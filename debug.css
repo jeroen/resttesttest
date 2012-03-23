@@ -7,6 +7,10 @@
   min-height: 350px;
 }
 
+#headerpre{
+  min-height: 100px;
+}
+
 #allparameters{
   display: none;
 }
