@@ -180,14 +180,20 @@ function getAllCookies() {
   return cookies;
 }
 
-function createCookie(name,value,days) {
+function createCookie(name,value,days,path) {
 	if (days) {
 		var date = new Date();
 		date.setTime(date.getTime()+(days*24*60*60*1000));
 		var expires = "; expires="+date.toGMTString();
+	} else {
+		var expires = "";
 	}
-	else var expires = "";
-	document.cookie = name+"="+value+expires+";";
+	
+	if(path){
+		document.cookie = name + "=" + value + expires + "; path=" + path;
+	} else {
+		document.cookie = name + "=" + value + expires;
+	}
 }
 
 function readCookie(name) {
@@ -203,6 +209,7 @@ function readCookie(name) {
 
 function eraseCookie(name) {
 	createCookie(name,"",-1);
+	createCookie(name,"",-1, "/");
 }
 
 function populateCookieTable(){
