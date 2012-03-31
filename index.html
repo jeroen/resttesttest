@@ -170,30 +170,23 @@
         </div>        
         </fieldset> 
      </form>
+
+     <div id="errordiv" > </div>
      
      <div id="cookiediv" class="well">
      
-     	 <legend> Local Cookies </legend>
+     	<legend> Local Cookies </legend>
      	 
-     	 <table class="table table-bordered">
+     	<table class="table table-bordered">
+	     	<tbody id="cookietablebody">  </tbody>
+     	</table>
 
-
-
-     	<tbody id="cookietablebody">
-     </tbody>
-     		</table>
-
-	<div id="cookiewarningdiv">
-		
-  	</div>
+		<div id="cookiewarningdiv">	</div>
     	 
-
      </div>
          
-     
-     <div id="errordiv" >
-     </div>
-           <div class="alert">
+   
+     <div class="alert">
 	        <a class="close" data-dismiss="alert">&times;</a>
 	        <strong>Keep in mind!</strong> Form method only supports GET and POST. 
 	        Ajax method does not support binary streams like uploading files or downloading images.
