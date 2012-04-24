@@ -27,7 +27,7 @@
 	float: right;
 }
 
-#submitform{
+#submitform, #submitblank{
 	margin-right: 5px;
 	margin-bottom: -10px;
 }
