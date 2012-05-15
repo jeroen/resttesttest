@@ -42,7 +42,8 @@ $("#httpmethod").change(function() {
 function postToIframe(target) {
 	var paramform = $("#paramform");
 	if ($("#httpmethod").val() == "POST") {
-		paramform.attr("enctype", "multipart/form-data");
+		var hasfiles = $("#paramform").find(".input-file").length > 0;
+		paramform.attr("enctype", hasfiles ? "multipart/form-data" : "application/x-www-form-urlencoded");		
 	} else {
 		paramform.attr("enctype", "");
 	}
