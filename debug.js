@@ -5,7 +5,8 @@ function showParamHeaders() {
 		
 		//disable ajax for file uploads
 		if($("#allparameters").find(".input-file.realinputvalue").length){
-			$("#submitajax").attr("disabled", "disabled")
+			$("#submitajax").attr("disabled", "disabled");
+			$("#httpmethod").val("POST");
 		}		
 	} else {
 		$("#allparameters").hide();
