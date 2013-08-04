@@ -1,6 +1,12 @@
 function showParamHeaders() {
+	$("#submitajax").removeAttr("disabled")
 	if ($("#allparameters").find(".realinputvalue").length > 0) {
 		$("#allparameters").show();
+		
+		//disable ajax for file uploads
+		if($("#allparameters").find(".input-file.realinputvalue").length){
+			$("#submitajax").attr("disabled", "disabled")
+		}		
 	} else {
 		$("#allparameters").hide();
 	}
