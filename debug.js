@@ -1,3 +1,27 @@
+function showHeaders() {
+	showAuthHeaders();
+	showHeaderHeaders();
+	showParamHeaders();
+}
+
+function showAuthHeaders() {
+	if ($("#authentication").find(".realinputvalue").length > 0) {
+		$("#addauthbutton").hide();
+		$("#authentication").show();
+	} else {
+		$("#addauthbutton").show();
+		$("#authentication").hide();
+	}
+}
+
+function showHeaderHeaders() {
+	if ($("#allheaders").find(".realinputvalue").length > 0) {
+		$("#allheaders").show();
+	} else {
+		$("#allheaders").hide();
+	}
+}
+
 function showParamHeaders() {
 	if ($("#allparameters").find(".realinputvalue").length > 0) {
 		$("#allparameters").show();
@@ -16,25 +40,44 @@ $(".fakeinputname").blur(function() {
 $(".close").click(function(e) {
   e.preventDefault();
   $(this).parent().remove();
-	showParamHeaders();
+	showHeaders();
+});
+
+$("#addauthbutton").click(function(e) {
+  e.preventDefault();
+	if ($("#authentication").find(".realinputvalue").length == 0) {
+		$('.httpauth:first').clone(true).appendTo("#authentication");
+	}
+	showHeaders();
+});
+
+$("#addheaderbutton").click(function(e) {
+  e.preventDefault();
+	$('.httpparameter:first').clone(true).appendTo("#allheaders");
+	showHeaders();
 });
 
 $("#addprambutton").click(function(e) {
   e.preventDefault();
 	$('.httpparameter:first').clone(true).appendTo("#allparameters");
-	showParamHeaders();
+	showHeaders();
 });
 
 $("#addfilebutton").click(function(e) {
   e.preventDefault();
 	$('.httpfile:first').clone(true).appendTo("#allparameters");
-	showParamHeaders();
+	showHeaders();
 });
 
 function postWithAjax(myajax) {
   myajax = myajax || {};
   myajax.url = $("#urlvalue").val();
   myajax.type = $("#httpmethod").val();
+  if (checkForAuth())
+  {
+	  myajax.username = $("#authentication input:first").val();
+	  myajax.password = $("#authentication input").eq(1).val();
+  }
   myajax.complete = function(jqXHR) {
 		$("#statuspre").text(
 				"HTTP " + jqXHR.status + " " + jqXHR.statusText);
@@ -75,6 +118,7 @@ $("#submitajax").click(function(e) {
   e.preventDefault();
   if(checkForFiles()){
     postWithAjax({
+      headers: createHeaderData(),
       data : createMultipart(), 
       cache: false,
       contentType: false,
@@ -82,6 +126,7 @@ $("#submitajax").click(function(e) {
     });
   } else {
     postWithAjax({
+      headers : createHeaderData(),
       data : createUrlData()
     });    
   }
@@ -89,6 +134,10 @@ $("#submitajax").click(function(e) {
 
 function checkForFiles() {
 	return $("#paramform").find(".input-file").length > 0;
+}
+
+function checkForAuth() {
+	return $("#paramform").find("input[type=password]").length > 0;
 }
 
 function createUrlData(){
@@ -123,6 +172,20 @@ function createMultipart(){
     }
 	}
   return(data)  
+}
+
+function createHeaderData(){
+  var mydata = {};
+	var parameters = $("#allheaders").find(".realinputvalue");
+	for (i = 0; i < parameters.length; i++) {
+		name = $(parameters).eq(i).attr("name");
+		if (name == undefined || name == "undefined") {
+			continue;
+		}
+		value = $(parameters).eq(i).val();
+		mydata[name] = value
+	}
+  return(mydata);
 }
 
 function httpZeroError() {
