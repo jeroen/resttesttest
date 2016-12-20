@@ -2,6 +2,7 @@ function showHeaders() {
 	showAuthHeaders();
 	showHeaderHeaders();
 	showParamHeaders();
+	showBody();
 }
 
 function showAuthHeaders() {
@@ -27,6 +28,12 @@ function showParamHeaders() {
 		$("#allparameters").show();
 	} else {
 		$("#allparameters").hide();
+	}
+}
+
+function showBody(body) {
+	if(body) {
+		$("#allbody").show();
 	}
 }
 
@@ -67,6 +74,13 @@ $("#addfilebutton").click(function(e) {
   e.preventDefault();
 	$('.httpfile:first').clone(true).appendTo("#allparameters");
 	showHeaders();
+});
+
+$("#addbodybutton").click(function(e) {
+  console.log("addbodybutton");
+  e.preventDefault();
+  $('#allbody').show();
+  showHeaders(true);
 });
 
 function postWithAjax(myajax) {
@@ -116,7 +130,14 @@ function postWithAjax(myajax) {
 
 $("#submitajax").click(function(e) {
   e.preventDefault();
-  if(checkForFiles()){
+  if (checkForBody()){
+	  postWithAjax({
+		  headers: createHeaderData(),
+		  data: createBodyData(),
+		  cache: false,
+		  contentType: getContentType()
+	  });
+  } else if(checkForFiles()){
     postWithAjax({
       headers: createHeaderData(),
       data : createMultipart(), 
@@ -138,6 +159,10 @@ function checkForFiles() {
 
 function checkForAuth() {
 	return $("#paramform").find("input[type=password]").length > 0;
+}
+
+function checkForBody() {
+	return $("#paramform").find("#body").val().length > 0;
 }
 
 function createUrlData(){
@@ -186,6 +211,14 @@ function createHeaderData(){
 		mydata[name] = value
 	}
   return(mydata);
+}
+
+function createBodyData() {
+	return $("#body").val();
+}
+
+function getContentType() {
+	return $("#contenttype").val();
 }
 
 function httpZeroError() {
