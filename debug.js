@@ -85,7 +85,7 @@ $("#addbodybutton").click(function(e) {
 
 function postWithAjax(myajax) {
   myajax = myajax || {};
-  myajax.url = $("#urlvalue").val();
+  myajax.url = $("#urlvalue").val() + buildArguments();
   myajax.type = $("#httpmethod").val();
   if (checkForAuth())
   {
@@ -163,6 +163,26 @@ function checkForAuth() {
 
 function checkForBody() {
 	return $("#paramform").find("#body").val().length > 0;
+}
+
+function buildArguments() {
+	if(checkForBody()) {
+		var parameters = $("#allparameters").find(".realinputvalue"), arguments  = "";
+		for (i = 0; i < parameters.length; i++) {
+			name = $(parameters).eq(i).attr("name");
+			if (name == undefined || name == "undefined") {
+				continue;
+			}
+			value = $(parameters).eq(i).val();
+			arguments += (arguments.length === 0 ? "" : "&") + name + "=" + encodeURIComponent(value);
+		}
+		if(arguments.length === 0) {
+			return "";
+		} else {
+			return "?" + arguments;
+		}
+	}
+	return "";
 }
 
 function createUrlData(){
