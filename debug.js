@@ -35,7 +35,7 @@ $(".fakeinputname").blur(function() {
   var newparamname = $(this).val();
   $(this).parent().parent().parent().parent().find(".realinputvalue").attr("name", newparamname);
 });
- 
+
 
 $(".close").click(function(e) {
   e.preventDefault();
@@ -90,7 +90,11 @@ function postWithAjax(myajax) {
 		} else {
 			$("#statuspre").addClass("alert-warning");
 		}
-		$("#outputpre").text(jqXHR.responseText);
+
+		// Format response JSON
+		var jsonpretty = JSON.stringify(JSON.parse(jqXHR.responseText), null, '\t');
+
+		$("#outputpre").text(jsonpretty);
 		$("#headerpre").text(jqXHR.getAllResponseHeaders());
 	}
 
@@ -119,16 +123,16 @@ $("#submitajax").click(function(e) {
   if(checkForFiles()){
     postWithAjax({
       headers: createHeaderData(),
-      data : createMultipart(), 
+      data : createMultipart(),
       cache: false,
       contentType: false,
-      processData: false  
+      processData: false
     });
   } else {
     postWithAjax({
       headers : createHeaderData(),
       data : createUrlData()
-    });    
+    });
   }
 });
 
@@ -157,7 +161,7 @@ function createUrlData(){
 function createMultipart(){
   //create multipart object
   var data = new FormData();
-  
+
   //add parameters
   var parameters = $("#allparameters").find(".realinputvalue");
 	for (i = 0; i < parameters.length; i++) {
@@ -166,12 +170,12 @@ function createMultipart(){
 			continue;
 		}
     if(parameters[i].files){
-  	  data.append(name, parameters[i].files[0]);      
+  	  data.append(name, parameters[i].files[0]);
     } else {
 		  data.append(name, $(parameters).eq(i).val());
     }
 	}
-  return(data)  
+  return(data)
 }
 
 function createHeaderData(){
