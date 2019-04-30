@@ -2,7 +2,7 @@ body {
   padding-top: 60px; 
 }
 
-#allparameters, #allheaders, #authentication {
+#allparameters, #allheaders, #allbody, #authentication {
   display: none;
 }
 
