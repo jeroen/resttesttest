@@ -2,6 +2,7 @@ function showHeaders() {
 	showAuthHeaders();
 	showHeaderHeaders();
 	showParamHeaders();
+	showBody();
 }
 
 function showAuthHeaders() {
@@ -30,12 +31,18 @@ function showParamHeaders() {
 	}
 }
 
+function showBody(body) {
+	if(body) {
+		$("#allbody").show();
+	}
+}
+
 //this specifies the parameter names
 $(".fakeinputname").blur(function() {
   var newparamname = $(this).val();
   $(this).parent().parent().parent().parent().find(".realinputvalue").attr("name", newparamname);
 });
- 
+
 
 $(".close").click(function(e) {
   e.preventDefault();
@@ -69,9 +76,16 @@ $("#addfilebutton").click(function(e) {
 	showHeaders();
 });
 
+$("#addbodybutton").click(function(e) {
+  console.log("addbodybutton");
+  e.preventDefault();
+  $('#allbody').show();
+  showHeaders(true);
+});
+
 function postWithAjax(myajax) {
   myajax = myajax || {};
-  myajax.url = $("#urlvalue").val();
+  myajax.url = $("#urlvalue").val() + buildArguments();
   myajax.type = $("#httpmethod").val();
   if (checkForAuth())
   {
@@ -90,7 +104,11 @@ function postWithAjax(myajax) {
 		} else {
 			$("#statuspre").addClass("alert-warning");
 		}
-		$("#outputpre").text(jqXHR.responseText);
+
+		// Format response JSON
+		var jsonpretty = JSON.stringify(JSON.parse(jqXHR.responseText), null, '\t');
+
+		$("#outputpre").text(jsonpretty);
 		$("#headerpre").text(jqXHR.getAllResponseHeaders());
 	}
 
@@ -116,19 +134,26 @@ function postWithAjax(myajax) {
 
 $("#submitajax").click(function(e) {
   e.preventDefault();
-  if(checkForFiles()){
+  if (checkForBody()){
+	  postWithAjax({
+		  headers: createHeaderData(),
+		  data: createBodyData(),
+		  cache: false,
+		  contentType: getContentType()
+	  });
+  } else if(checkForFiles()){
     postWithAjax({
       headers: createHeaderData(),
-      data : createMultipart(), 
+      data : createMultipart(),
       cache: false,
       contentType: false,
-      processData: false  
+      processData: false
     });
   } else {
     postWithAjax({
       headers : createHeaderData(),
       data : createUrlData()
-    });    
+    });
   }
 });
 
@@ -138,6 +163,30 @@ function checkForFiles() {
 
 function checkForAuth() {
 	return $("#paramform").find("input[type=password]").length > 0;
+}
+
+function checkForBody() {
+	return $("#paramform").find("#body").val().length > 0;
+}
+
+function buildArguments() {
+	if(checkForBody()) {
+		var parameters = $("#allparameters").find(".realinputvalue"), arguments  = "";
+		for (i = 0; i < parameters.length; i++) {
+			name = $(parameters).eq(i).attr("name");
+			if (name == undefined || name == "undefined") {
+				continue;
+			}
+			value = $(parameters).eq(i).val();
+			arguments += (arguments.length === 0 ? "" : "&") + name + "=" + encodeURIComponent(value);
+		}
+		if(arguments.length === 0) {
+			return "";
+		} else {
+			return "?" + arguments;
+		}
+	}
+	return "";
 }
 
 function createUrlData(){
@@ -157,7 +206,7 @@ function createUrlData(){
 function createMultipart(){
   //create multipart object
   var data = new FormData();
-  
+
   //add parameters
   var parameters = $("#allparameters").find(".realinputvalue");
 	for (i = 0; i < parameters.length; i++) {
@@ -166,12 +215,12 @@ function createMultipart(){
 			continue;
 		}
     if(parameters[i].files){
-  	  data.append(name, parameters[i].files[0]);      
+  	  data.append(name, parameters[i].files[0]);
     } else {
 		  data.append(name, $(parameters).eq(i).val());
     }
 	}
-  return(data)  
+  return(data)
 }
 
 function createHeaderData(){
@@ -186,6 +235,14 @@ function createHeaderData(){
 		mydata[name] = value
 	}
   return(mydata);
+}
+
+function createBodyData() {
+	return $("#body").val();
+}
+
+function getContentType() {
+	return $("#contenttype").val();
 }
 
 function httpZeroError() {
