@@ -16,72 +16,72 @@
 
 <body>
 
-	<div class="hidden">
+    <div class="hidden">
 
-		<div class="httpfile">
-			<a class="close">&times;</a>
-			<div class="row show-grid">
-				<div class="span2">
-					<div class="control-group">
-						<div class="controls">
-							<input type="text" class="input-medium fakeinputname" value="">
-						</div>
-					</div>
-				</div>
+        <div class="httpfile">
+            <a class="close">&times;</a>
+            <div class="row show-grid">
+                <div class="span2">
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="text" class="input-medium fakeinputname" value="">
+                        </div>
+                    </div>
+                </div>
 
-				<div class="span3">
-					<div class="control-group">
-						<div class="controls">
-							<input class="input-file realinputvalue" multiple type="file">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="controls">
+                            <input class="input-file realinputvalue" multiple type="file">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div class="httpparameter">
-			<a class="close">&times;</a>
-			<div class="row show-grid">
-				<div class="span2">
-					<div class="control-group">
-						<div class="controls">
-							<input type="text" class="input-medium fakeinputname" value="">
-						</div>
-					</div>
-				</div>
+        <div class="httpparameter">
+            <a class="close">&times;</a>
+            <div class="row show-grid">
+                <div class="span2">
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="text" class="input-medium fakeinputname" value="">
+                        </div>
+                    </div>
+                </div>
 
-				<div class="span3">
-					<div class="control-group">
-						<div class="controls">
-							<input type="text" class="input-xlarge realinputvalue" value="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="text" class="input-xlarge realinputvalue" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<div class="httpauth">
-			<a class="close">&times;</a>
-			<div class="row show-grid">
-				<div class="span2">
-					<div class="control-group">
-						<div class="controls">
-							<input type="text" class="input-medium fakeinputname" value="">
-						</div>
-					</div>
-				</div>
+        <div class="httpauth">
+            <a class="close">&times;</a>
+            <div class="row show-grid">
+                <div class="span2">
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="text" class="input-medium fakeinputname" value="">
+                        </div>
+                    </div>
+                </div>
 
-				<div class="span3">
-					<div class="control-group">
-						<div class="controls">
-							<input type="password" class="input-xlarge realinputvalue" value="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                <div class="span3">
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="password" class="input-xlarge realinputvalue" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 	</div>
-
+	
 	</div>
 
 	<div class="navbar navbar-fixed-top navbar-inverse">
@@ -103,161 +103,215 @@
 		</div>
 	</div>
 
-	<div class="container">
+    <div class="container">
 
-		<div class="row show-grid">
-			<div id="leftcolumn" class="span6">
-				<form id="paramform" class="well" target="outputframe">
-					<fieldset>
-						<legend>HTTP request options</legend>
+        <div class="row show-grid">
+            <div id="leftcolumn" class="span6">
+                <form id="paramform" class="well" target="outputframe">
+                    <fieldset>
+                        <legend>HTTP request options</legend>
 
-						<br />
+                        <div class="row">
+                            <div class="span5">
+                                <div class="control-group">
+                                    <label class="control-label" for="presetselect">Preset</label>
+                                    <div class="controls">
+                                        <select id="presetselect" class="input-xxlarge">
+                                            <option disabled selected>Select a preset or enter custom settings below</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="row show-grid">
+                            <div class="span1">
+                                <div class="control-group">
+                                    <label class="control-label" for="httpmethod">Method</label>
+                                    <div class="controls">
+                                        <select class="input-small" id="httpmethod">
+                                            <option>GET</option>
+                                            <option>POST</option>
+                                            <option>OPTIONS</option>
+                                            <option>PUT</option>
+                                            <option>DELETE</option>
+                                            <option>HEAD</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-						<div class="row show-grid">
-							<div class="span1">
-								<div class="control-group">
-									<label class="control-label" for="httpmethod">Method</label>
-									<div class="controls">
-										<select class="input-small" id="httpmethod">
-											<option>GET</option>
-											<option>POST</option>
-  											<option>OPTIONS</option>
-											<option>PUT</option>
-											<option>DELETE</option>
-											<option>HEAD</option>
-										</select>
-									</div>
-								</div>
-							</div>
-
-							<div class="span4">
-								<div class="control-group">
-									<label class="control-label" for="urlvalue">Endpoint</label>
-									<div class="controls">
-										<input type="text" class="input-xlarge" id="urlvalue"
-											value="https://httpbin.org/get">
-									</div>
-								</div>
-							</div>
-						</div>
+                            <div class="span4">
+                                <div class="control-group">
+                                    <label class="control-label" for="urlvalue">Endpoint</label>
+                                    <div class="controls">
+                                        <input type="text" class="input-xlarge" id="urlvalue">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 						<p class="help-block">Method and Endpoint are required. Click
 							below to add additional parameters.</p>
 
-						<div align="left">
-							<button id="addauthbutton" class="btn btn-primary" style="margin-bottom: 1.5em;">
-								<i class="icon-lock icon-white"></i> Add authentication
-							</button>
-						</div>
+                        <div align="left">
+                            <button id="addauthbutton" class="btn btn-primary" style="margin-bottom: 1.5em;">
+                                <i class="icon-lock icon-white"></i> Add authentication
+                            </button>
+                        </div>
 
-						<div id="authentication">
+                        <div id="authentication">
 
-							<div class="row show-grid">
-								<div class="span2">
-									<div class="control-group">
-										<label class="control-label">Username</label>
-									</div>
-								</div>
+                            <div class="row show-grid">
+                                <div class="span2">
+                                    <div class="control-group">
+                                        <label class="control-label">Username</label>
+                                    </div>
+                                </div>
 
-								<div class="span3">
-									<div class="control-group">
-										<label class="control-label">Password</label>
-									</div>
-								</div>
-							</div>
-						</div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <label class="control-label">Password</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-						<div id="allheaders">
+                        <div id="allheaders">
 
-							<div class="row show-grid">
-								<div class="span2">
-									<div class="control-group">
-										<label class="control-label">Header Name</label>
-									</div>
-								</div>
+                            <div class="row show-grid">
+                                <div class="span2">
+                                    <div class="control-group">
+                                        <label class="control-label">Header Name</label>
+                                    </div>
+                                </div>
 
-								<div class="span3">
-									<div class="control-group">
-										<label class="control-label">Header Value</label>
-									</div>
-								</div>
-							</div>
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <label class="control-label">Header Value</label>
+                                    </div>
+                                </div>
+                            </div>
 
-						</div>
+                        </div>
 
-						<div align="left">
-							<button id="addheaderbutton" class="btn btn-primary">
-								<i class="icon-plus icon-white"></i> Add header
-							</button>
-						</div>
+                        <div align="left">
+                            <button id="addheaderbutton" class="btn btn-primary">
+                                <i class="icon-plus icon-white"></i> Add header
+                            </button>
+                        </div>
+                        <br />
+
+                        <div id="allparameters">
+
+                            <div class="row show-grid">
+                                <div class="span2">
+                                    <div class="control-group">
+                                        <label class="control-label">Parameter Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="span3">
+                                    <div class="control-group">
+                                        <label class="control-label">Parameter Value</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div align="left">
+                            <label class="checkbox">
+                                <input id="encodeparameterstickbox" type="checkbox" value="">
+                                Encode parameters
+                            </label>
+                        </div>
+
+                        <div align="left">
+                            <button id="addprambutton" class="btn btn-primary">
+                                <i class="icon-plus icon-white"></i> Add parameter
+                            </button>
+                            <button id="addfilebutton" class="btn btn-primary">
+                                <i class="icon-file icon-white"></i> Add file
+                            </button>
+                        </div>
 						<br />
 
-						<div id="allparameters">
+						<div id="allbody">
 
+							<a class="close hideonly">&times;</a>
 							<div class="row show-grid">
-								<div class="span2">
+								<div class="span5">
 									<div class="control-group">
-										<label class="control-label">Parameter Name</label>
-									</div>
-								</div>
-
-								<div class="span3">
-									<div class="control-group">
-										<label class="control-label">Parameter Value</label>
+										<label class="control-label">Content-Type</label>
 									</div>
 								</div>
 							</div>
-
+							<div class="row show-grid">
+								<div class="span5">
+									<input type="text" id="contenttype" class="input-xlarge" value="application/json"/>
+								</div>
+							</div>
+							<div class="row show-grid">
+								<div class="span5">
+									<div class="control-group">
+										<label class="control-label">Request Body</label>
+									</div>
+								</div>
+							</div>
+							<div class="row show-grid">
+								<div class="span5">
+									<textarea id="body" class="input-xlarge" rows="6"></textarea>
+								</div>
+							</div>
 						</div>
 
-						<div align="left">
-							<button id="addprambutton" class="btn btn-primary">
-								<i class="icon-plus icon-white"></i> Add parameter
-							</button>
-							<button id="addfilebutton" class="btn btn-primary">
-								<i class="icon-file icon-white"></i> Add file
+                        <div align="left">
+							<button id="addbodybutton" class="btn btn-primary">
+								<i class=""></i>{ } Add Body
 							</button>
 						</div>
-						<br />
 
-						<div align="right">
-							<button id="submitajax" class="btn btn-success btn-large">
-								<i class="icon-download-alt icon-white"></i> Ajax request
-							</button>
-							<img src="spinner.gif" id="ajaxspinner" />
-						</div>
-					</fieldset>
-				</form>
+                        <br />
 
-				<div id="errordiv"></div>
-        
-  			<div class="alert alert-info">
+                        <div>
+                            <button id="resetformbutton" class="btn btn-danger btn-large pull-left">
+                                <i class="icon-trash icon-white"></i> Reset form
+                            </button>
+                            <button id="submitajax" class="btn btn-success btn-large pull-right">
+                                <i id="submitajaxicon" class="icon-white icon-download-alt"></i> Ajax request
+                            </button>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <div id="errordiv"></div>
+
+				<div id="reminderalertbox" class="alert alert-info">
 					<a class="close" data-dismiss="alert">&times;</a> <strong>Welcome!</strong>
-          Use this simple page to poke around at the API.
-          Specify HTTP method, URL and parameters, and click on <b>Ajax Request</b>.
-          Note that this page requires a browser with HTML5 support.
-				</div>
+                    <div id="remindermessage">
+                        Use this simple page to poke around at the API.
+                        Specify HTTP method, URL and parameters, and click on <b>Ajax Request</b>.
+                        Note that this page requires a browser with HTML5 support.
+                    </div>
+                </div>
 
-			</div>
-
-			<div class="span6">
-				<div id="ajaxoutput">
-					<pre id="statuspre">0</pre>
-					<pre class="pre-scrollable prettyprint linenums" id="outputpre"></pre>
-					<pre class="pre-scrollable prettyprint linenums" id="headerpre"></pre>
-				</div>
-			</div>
-		</div>
-
-		<br>
-
-
-	</div>
+            </div>
+            <div class="span6">
+                <div id="ajaxoutput">
+                    <pre id="statuspre">0</pre>
+                    <pre class="pre-scrollable prettyprint linenums" id="outputpre" style="margin-bottom: 0px;"></pre>
+                    <a id="viewResultInNetTab">View Result In New Tab</a>
+                    <pre class="pre-scrollable prettyprint linenums" id="headerpre"></pre>
+                </div>
+            </div>
+        </div>
+        
+    </div>
 
 	<script src="jquery-1.10.2.min.js"></script>
 	<script src="bootstrap/js/bootstrap.min.js"></script>
-	<script src="debug.js"></script>
-  
+    <script src="debug.js"></script>
+    
 </body>
 </html>
